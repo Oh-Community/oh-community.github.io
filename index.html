@@ -14,6 +14,19 @@ xmlns="http://www.w3.org/TR/REC-html40">
     xmlns="http://www.w3.org/TR/REC-html40">
 	
 <head>
+
+<script>
+    function checkPassword() {
+        var password = prompt("Please enter the password:");
+        if (password === "12306123") {
+            document.getElementById("protected-content").style.display = "block";
+        } else {
+            alert("Incorrect password!");
+            window.location.href = "https://www.google.com"; // Redirect to another page if password is incorrect
+        }
+    }
+</script>
+
 <meta name=ProgId content=Word.Document>
 <meta name=Generator content="Microsoft Word 15">
 <meta name=Originator content="Microsoft Word 15">
@@ -853,6 +866,10 @@ div.WordSection1
 </head>
 
 <body lang=ZH-CN link="#467886" vlink="#96607D" style='tab-interval:21.0pt;
+
+<div id="protected-content" style="display:none;">
+<!-- Protected content starts here -->
+	
 word-wrap:break-word;text-justify-trim:punctuation'>
 
 <div class=WordSection1 style='layout-grid:15.6pt'>
@@ -1833,6 +1850,8 @@ mso-fareast-language:ZH-TW'>格式可能因設備而異</span></i><i><span lang=
 style='font-size:8.0pt;font-family:"Times New Roman",serif;color:red'> Format
 may be affected by your device***</span></i></p>
 
+    </div>
+    <!-- Protected content ends here -->
 </div>
 
 </body>

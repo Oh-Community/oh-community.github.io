@@ -14,6 +14,15 @@ xmlns="http://www.w3.org/TR/REC-html40">
     xmlns="http://www.w3.org/TR/REC-html40">
 	
 <head>
+<!-- 密碼保護容器 -->
+<div id="password-container" class="password-container">
+        <form id="password-form" class="password-form">
+            <h2>請輸入密碼以訪問計時器</h2>
+            <input type="password" id="password-input" placeholder="請輸入密碼" required>
+            <div id="error-message" class="error-message"></div>
+            <button type="submit">登入</button>
+        </form>
+    </div>
 
 <script>
     function checkPassword() {
@@ -25,6 +34,53 @@ xmlns="http://www.w3.org/TR/REC-html40">
             window.location.href = "https://www.google.com"; // Redirect to another page if password is incorrect
         }
     }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 密碼保護相關元素
+            const passwordContainer = document.getElementById('password-container');
+            const timerContainer = document.getElementById('timer-container');
+            const passwordForm = document.getElementById('password-form');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+            const logoutBtn = document.getElementById('logout');
+            
+            // 設定密碼 (實際應用中應使用更安全的方式)
+            const correctPassword = "123456"; // 更改為您想要的密碼
+            
+            // 密碼驗證
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const enteredPassword = passwordInput.value;
+                
+                if (enteredPassword === correctPassword) {
+                    // 密碼正確，顯示計時器
+                    passwordContainer.style.display = 'none';
+                    timerContainer.style.display = 'block';
+                    // 保存登入狀態
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                } else {
+                    // 密碼錯誤，顯示錯誤訊息
+                    errorMessage.textContent = '密碼錯誤，請重試。';
+                    passwordInput.value = '';
+                }
+            });
+            
+            // 登出功能
+            logoutBtn.addEventListener('click', function() {
+                timerContainer.style.display = 'none';
+                passwordContainer.style.display = 'block';
+                passwordInput.value = '';
+                errorMessage.textContent = '';
+                // 清除登入狀態
+                sessionStorage.removeItem('isLoggedIn');
+            });
+            
+            // 檢查是否已登入
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                passwordContainer.style.display = 'none';
+                timerContainer.style.display = 'block';
+            }
 </script>
 
 <meta name=ProgId content=Word.Document>
